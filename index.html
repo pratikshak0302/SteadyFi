@@ -211,7 +211,14 @@ body{font-family:var(--ff-sans);background:var(--cream);color:var(--ink);min-hei
 .btn-full:hover{background:var(--sage-mid);}
 
 /* ===================== DASHBOARD ===================== */
-/* Grid layout for dashboard */
+/* Grid layout for dashboard with right sidebar for AI chat */
+.dashboard-wrapper{
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:24px;
+  width:100%;
+}
+
 .dash-grid{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
@@ -489,7 +496,7 @@ body{font-family:var(--ff-sans);background:var(--cream);color:var(--ink);min-hei
 }
 .risk-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;}
 .risk-track{height:10px;background:linear-gradient(90deg,#a8d5b4,#f0c97a,#e8927a);border-radius:5px;position:relative;margin-bottom:8px;}
-.risk-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2.5px solid var(--sage);position:absolute;top:50%;transform:translate(-50%,-50%);left:35%;box-shadow:0 2px 6px rgba(0,0,0,.15);}
+.risk-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2.5px solid var(--sage);position:absolute;top:50%;transform:translate(-50%,-50%);left:35%;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
 .risk-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);}
 .risk-desc{font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.6;}
 
@@ -563,53 +570,45 @@ body.is-onboarding .page-content{
   min-height:100vh;background:var(--cream);
 }
 
-/* AI SCENARIO CHAT */
-.ai-chat-section{margin-top:28px;}
+/* AI SCENARIO CHAT - Only visible on dashboard */
+.ai-chat-sidebar{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--rad);
+  padding:20px;display:flex;flex-direction:column;height:fit-content;
+  position:sticky;top:calc(var(--topbar-h) + 32px);
+}
 .ai-chat-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;}
-.ai-chat-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--rad);overflow:hidden;}
-.ai-messages{padding:16px;display:flex;flex-direction:column;gap:12px;min-height:80px;max-height:340px;overflow-y:auto;}
+.ai-chat-box{background:var(--cream);border:1.5px solid var(--border);border-radius:var(--rad);overflow:hidden;display:flex;flex-direction:column;height:400px;}
+.ai-messages{padding:12px;display:flex;flex-direction:column;gap:12px;flex:1;overflow-y:auto;}
 .ai-msg{display:flex;gap:10px;align-items:flex-start;}
 .ai-msg.user{flex-direction:row-reverse;}
 .ai-bubble{
-  padding:12px 16px;border-radius:14px;font-size:13px;line-height:1.7;
-  max-width:85%;color:var(--ink);
+  padding:12px 14px;border-radius:12px;font-size:12px;line-height:1.6;
+  max-width:80%;color:var(--ink);
 }
-.ai-msg.bot .ai-bubble{background:var(--cream2);border:1px solid var(--border);border-top-left-radius:4px;}
-.ai-msg.user .ai-bubble{background:var(--sage);color:#fff;border-top-right-radius:4px;}
+.ai-msg.bot .ai-bubble{background:var(--white);border:1px solid var(--border);border-top-left-radius:2px;}
+.ai-msg.user .ai-bubble{background:var(--sage);color:#fff;border-top-right-radius:2px;}
 .ai-avatar{
-  width:28px;height:28px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:13px;
-  background:var(--sage-light);color:var(--sage);font-weight:600;margin-top:2px;
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+  background:var(--sage-light);color:var(--sage);font-weight:600;
 }
 .ai-msg.user .ai-avatar{background:var(--sage);color:#fff;}
 .ai-input-row{
-  display:flex;gap:0;border-top:1px solid var(--border);
+  display:flex;gap:8px;border-top:1px solid var(--border);padding:10px;
 }
 .ai-input{
-  flex:1;padding:14px 16px;border:none;outline:none;
-  font-family:var(--ff-sans);font-size:13px;color:var(--ink);
+  flex:1;padding:8px 12px;border:1px solid var(--border);outline:none;border-radius:8px;
+  font-family:var(--ff-sans);font-size:12px;color:var(--ink);
   background:var(--white);resize:none;
 }
 .ai-input::placeholder{color:var(--ink3);}
 .ai-send{
-  padding:12px 20px;border:none;background:var(--sage);color:#fff;
-  font-family:var(--ff-sans);font-size:13px;font-weight:600;cursor:pointer;
+  padding:8px 16px;border:none;background:var(--sage);color:#fff;
+  font-family:var(--ff-sans);font-size:12px;font-weight:600;cursor:pointer;border-radius:8px;
   transition:all .2s;flex-shrink:0;
 }
 .ai-send:hover{background:var(--sage-mid);}
 .ai-send:disabled{background:var(--border2);color:var(--ink3);cursor:not-allowed;}
-.ai-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
-.ai-suggestion{
-  background:var(--cream2);border:1px solid var(--border);border-radius:20px;
-  padding:6px 14px;font-size:12px;color:var(--ink2);cursor:pointer;
-  font-family:var(--ff-sans);transition:all .2s;
-}
-.ai-suggestion:hover{border-color:var(--sage-mid);background:var(--sage-pale);color:var(--sage);}
-.ai-typing{display:flex;gap:4px;align-items:center;padding:4px 0;}
-.ai-typing span{width:7px;height:7px;border-radius:50%;background:var(--ink3);display:inline-block;animation:typing 1.2s infinite;}
-.ai-typing span:nth-child(2){animation-delay:.2s;}
-.ai-typing span:nth-child(3){animation-delay:.4s;}
-@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-4px);}}
 
 </style>
 </head>
@@ -820,371 +819,376 @@ body.is-onboarding .page-content{
 
       <!-- ===== DASHBOARD PAGE ===== -->
       <div class="page" id="page-dashboard">
-        <div class="dash-grid">
+        <div class="dashboard-wrapper">
+          <div class="dash-grid">
 
-          <!-- Health card -->
-          <div class="health-card">
-            <div class="health-main">
-              <div class="health-label">Portfolio Health Score</div>
-              <div class="health-score-row">
-                <div class="health-score">74</div>
-                <div class="health-score-max">/100</div>
+            <!-- Health card -->
+            <div class="health-card">
+              <div class="health-main">
+                <div class="health-label">Portfolio Health Score</div>
+                <div class="health-score-row">
+                  <div class="health-score">74</div>
+                  <div class="health-score-max">/100</div>
+                </div>
+                <div class="health-status">Good · On track for your goals</div>
+                <div class="health-bar-bg"><div class="health-bar-fill"></div></div>
+                <div class="health-chips">
+                  <div class="health-chip">✓ Well diversified</div>
+                  <div class="health-chip">✓ Risk balanced</div>
+                  <div class="health-chip">⚡ 1 action needed</div>
+                </div>
               </div>
-              <div class="health-status">Good · On track for your goals</div>
-              <div class="health-bar-bg"><div class="health-bar-fill"></div></div>
-              <div class="health-chips">
-                <div class="health-chip">✓ Well diversified</div>
-                <div class="health-chip">✓ Risk balanced</div>
-                <div class="health-chip">⚡ 1 action needed</div>
+              <div class="health-stats-aside">
+                <div class="hs-item">
+                  <div class="hs-label">Total Value</div>
+                  <div class="hs-val">₹3.42L</div>
+                  <div class="hs-chg">↑ 14.1% all-time</div>
+                </div>
+                <div class="hs-item">
+                  <div class="hs-label">Today's Gain</div>
+                  <div class="hs-val">₹1,240</div>
+                  <div class="hs-chg">↑ 0.36%</div>
+                </div>
+                <div class="hs-item">
+                  <div class="hs-label">Monthly SIP</div>
+                  <div class="hs-val">₹8,000</div>
+                  <div class="hs-chg">Active</div>
+                </div>
               </div>
             </div>
-            <div class="health-stats-aside">
-              <div class="hs-item">
-                <div class="hs-label">Total Value</div>
-                <div class="hs-val">₹3.42L</div>
-                <div class="hs-chg">↑ 14.1% all-time</div>
+
+            <!-- Alert -->
+            <div class="alert-card" onclick="goPage('rebalance')" style="grid-column:1/-1;">
+              <div class="alert-dot"></div>
+              <div class="alert-text">
+                <strong>Rebalancing Suggested</strong> · Your equity allocation is 8% above target. Tap to see the easy fix.
               </div>
-              <div class="hs-item">
-                <div class="hs-label">Today's Gain</div>
-                <div class="hs-val">₹1,240</div>
-                <div class="hs-chg">↑ 0.36%</div>
+              <div class="alert-arr">›</div>
+            </div>
+
+            <!-- Allocation -->
+            <div class="alloc-card">
+              <div class="section-row" style="margin-bottom:16px;">
+                <div class="section-title">Allocation</div>
+                <div class="section-link">Details</div>
               </div>
-              <div class="hs-item">
-                <div class="hs-label">Monthly SIP</div>
-                <div class="hs-val">₹8,000</div>
-                <div class="hs-chg">Active</div>
+              <div class="alloc-inner">
+                <div class="donut-wrap">
+                  <canvas id="donutChart" width="110" height="110"></canvas>
+                  <div class="donut-center">
+                    <div class="donut-val">₹3.42L</div>
+                    <div class="donut-sub">total</div>
+                  </div>
+                </div>
+                <div class="alloc-legend">
+                  <div class="alloc-item">
+                    <div class="alloc-dot" style="background:#4a7c59;"></div>
+                    <div style="flex:1;">
+                      <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Equity</span><span class="alloc-pct">58%</span></div>
+                      <div class="alloc-bar"><div class="alloc-bar-fill" style="width:58%;background:#4a7c59;"></div></div>
+                    </div>
+                  </div>
+                  <div class="alloc-item">
+                    <div class="alloc-dot" style="background:#4a7fa8;"></div>
+                    <div style="flex:1;">
+                      <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Debt Funds</span><span class="alloc-pct">27%</span></div>
+                      <div class="alloc-bar"><div class="alloc-bar-fill" style="width:27%;background:#4a7fa8;"></div></div>
+                    </div>
+                  </div>
+                  <div class="alloc-item">
+                    <div class="alloc-dot" style="background:#c17f3e;"></div>
+                    <div style="flex:1;">
+                      <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Gold</span><span class="alloc-pct">10%</span></div>
+                      <div class="alloc-bar"><div class="alloc-bar-fill" style="width:10%;background:#c17f3e;"></div></div>
+                    </div>
+                  </div>
+                  <div class="alloc-item">
+                    <div class="alloc-dot" style="background:#9a8f84;"></div>
+                    <div style="flex:1;">
+                      <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Cash</span><span class="alloc-pct">5%</span></div>
+                      <div class="alloc-bar"><div class="alloc-bar-fill" style="width:5%;background:#9a8f84;"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-wrap">
+              <div class="chart-title-row">
+                <div class="chart-title">Portfolio Growth</div>
+                <div class="chart-tabs">
+                  <button class="chart-tab" onclick="switchTab(this,'1M')">1M</button>
+                  <button class="chart-tab active" onclick="switchTab(this,'6M')">6M</button>
+                  <button class="chart-tab" onclick="switchTab(this,'1Y')">1Y</button>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="lineChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Holdings table -->
+            <div class="holdings-section">
+              <div class="section-row">
+                <div class="section-title">My Holdings</div>
+                <div class="section-link" onclick="goPage('rebalance')">Rebalance →</div>
+              </div>
+              <div class="holdings-table">
+                <div class="holdings-thead">
+                  <div class="th">Name</div>
+                  <div class="th">Type</div>
+                  <div class="th right">Current Value</div>
+                  <div class="th right">Total Return</div>
+                  <div class="th right">Units</div>
+                </div>
+                <div class="holding" onclick="showHolding('Nifty 50 Index Fund','Equity Mutual Fund','₹1,24,500','₹18,200','17.1%','up','1,247 units · NAV ₹99.84')">
+                  <div class="holding-left">
+                    <div class="holding-ico" style="background:#e8f0eb;color:#4a7c59;">N50</div>
+                    <div>
+                      <div class="holding-name">Nifty 50 Index Fund</div>
+                      <div class="holding-sub">Index Fund</div>
+                    </div>
+                  </div>
+                  <div class="holding-cell"><span class="holding-tag equity">Equity</span></div>
+                  <div class="holding-cell right">₹1,24,500</div>
+                  <div class="holding-cell right"><div class="holding-chg up">↑ ₹18,200 (17.1%)</div></div>
+                  <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">1,247 units</div>
+                </div>
+                <div class="holding" onclick="showHolding('HDFC Mid-Cap Fund','Equity Mutual Fund','₹74,320','₹9,820','15.2%','up','432 units · NAV ₹172.04')">
+                  <div class="holding-left">
+                    <div class="holding-ico" style="background:#eaf2f8;color:#4a7fa8;">MC</div>
+                    <div>
+                      <div class="holding-name">HDFC Mid-Cap Fund</div>
+                      <div class="holding-sub">Mid Cap</div>
+                    </div>
+                  </div>
+                  <div class="holding-cell"><span class="holding-tag equity">Equity</span></div>
+                  <div class="holding-cell right">₹74,320</div>
+                  <div class="holding-cell right"><div class="holding-chg up">↑ ₹9,820 (15.2%)</div></div>
+                  <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">432 units</div>
+                </div>
+                <div class="holding" onclick="showHolding('SBI Debt Fund','Debt Mutual Fund','₹68,400','₹4,120','6.4%','up','2,800 units · NAV ₹24.43')">
+                  <div class="holding-left">
+                    <div class="holding-ico" style="background:#eaf2f8;color:#4a7fa8;">DB</div>
+                    <div>
+                      <div class="holding-name">SBI Debt Fund</div>
+                      <div class="holding-sub">Low Risk</div>
+                    </div>
+                  </div>
+                  <div class="holding-cell"><span class="holding-tag debt">Debt</span></div>
+                  <div class="holding-cell right">₹68,400</div>
+                  <div class="holding-cell right"><div class="holding-chg up">↑ ₹4,120 (6.4%)</div></div>
+                  <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">2,800 units</div>
+                </div>
+                <div class="holding" onclick="showHolding('Gold ETF','Commodity','₹34,120','-₹840','-2.4%','dn','14 units · Price ₹2,437')">
+                  <div class="holding-left">
+                    <div class="holding-ico" style="background:#fdf3e7;color:#c17f3e;">Au</div>
+                    <div>
+                      <div class="holding-name">Gold ETF</div>
+                      <div class="holding-sub">Safe Haven</div>
+                    </div>
+                  </div>
+                  <div class="holding-cell"><span class="holding-tag gold">Gold</span></div>
+                  <div class="holding-cell right">₹34,120</div>
+                  <div class="holding-cell right"><div class="holding-chg dn">↓ ₹840 (-2.4%)</div></div>
+                  <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">14 units</div>
+                </div>
+                <div class="holding" onclick="showHolding('Infosys Ltd.','Individual Stock','₹21,280','₹3,200','17.7%','up','12 shares · ₹1,773/share')">
+                  <div class="holding-left">
+                    <div class="holding-ico" style="background:#f0f5f1;color:#4a7c59;">INFY</div>
+                    <div>
+                      <div class="holding-name">Infosys Ltd.</div>
+                      <div class="holding-sub">Tech</div>
+                    </div>
+                  </div>
+                  <div class="holding-cell"><span class="holding-tag stock">Stock</span></div>
+                  <div class="holding-cell right">₹21,280</div>
+                  <div class="holding-cell right"><div class="holding-chg up">↑ ₹3,200 (17.7%)</div></div>
+                  <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">12 shares</div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Alert -->
-          <div class="alert-card" onclick="goPage('rebalance')" style="grid-column:1/-1;">
-            <div class="alert-dot"></div>
-            <div class="alert-text">
-              <strong>Rebalancing Suggested</strong> · Your equity allocation is 8% above target. Tap to see the easy fix.
-            </div>
-            <div class="alert-arr">›</div>
-          </div>
-
-          <!-- Allocation -->
-          <div class="alloc-card">
-            <div class="section-row" style="margin-bottom:16px;">
-              <div class="section-title">Allocation</div>
-              <div class="section-link">Details</div>
-            </div>
-            <div class="alloc-inner">
-              <div class="donut-wrap">
-                <canvas id="donutChart" width="110" height="110"></canvas>
-                <div class="donut-center">
-                  <div class="donut-val">₹3.42L</div>
-                  <div class="donut-sub">total</div>
+          <!-- AI Chat Sidebar - Only on Dashboard -->
+          <div class="ai-chat-sidebar">
+            <div class="ai-chat-label">Ask VestWise</div>
+            <div class="ai-chat-box">
+              <div class="ai-messages" id="aiMessages">
+                <div class="ai-msg bot">
+                  <div class="ai-avatar">V</div>
+                  <div class="ai-bubble">Hi Priya! 👋 Ask me about your portfolio, rebalancing, or investment strategies.</div>
                 </div>
               </div>
-              <div class="alloc-legend">
-                <div class="alloc-item">
-                  <div class="alloc-dot" style="background:#4a7c59;"></div>
-                  <div style="flex:1;">
-                    <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Equity</span><span class="alloc-pct">58%</span></div>
-                    <div class="alloc-bar"><div class="alloc-bar-fill" style="width:58%;background:#4a7c59;"></div></div>
-                  </div>
-                </div>
-                <div class="alloc-item">
-                  <div class="alloc-dot" style="background:#4a7fa8;"></div>
-                  <div style="flex:1;">
-                    <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Debt Funds</span><span class="alloc-pct">27%</span></div>
-                    <div class="alloc-bar"><div class="alloc-bar-fill" style="width:27%;background:#4a7fa8;"></div></div>
-                  </div>
-                </div>
-                <div class="alloc-item">
-                  <div class="alloc-dot" style="background:#c17f3e;"></div>
-                  <div style="flex:1;">
-                    <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Gold</span><span class="alloc-pct">10%</span></div>
-                    <div class="alloc-bar"><div class="alloc-bar-fill" style="width:10%;background:#c17f3e;"></div></div>
-                  </div>
-                </div>
-                <div class="alloc-item">
-                  <div class="alloc-dot" style="background:#9a8f84;"></div>
-                  <div style="flex:1;">
-                    <div style="display:flex;justify-content:space-between;"><span class="alloc-name">Cash</span><span class="alloc-pct">5%</span></div>
-                    <div class="alloc-bar"><div class="alloc-bar-fill" style="width:5%;background:#9a8f84;"></div></div>
-                  </div>
-                </div>
+              <div class="ai-input-row">
+                <input type="text" class="ai-input" id="aiInput" placeholder="Ask a question..." />
+                <button class="ai-send" onclick="sendAIMessage()">Send</button>
               </div>
             </div>
           </div>
-
-          <!-- Chart -->
-          <div class="chart-wrap">
-            <div class="chart-title-row">
-              <div class="chart-title">Portfolio Growth</div>
-              <div class="chart-tabs">
-                <button class="chart-tab" onclick="switchTab(this,'1M')">1M</button>
-                <button class="chart-tab active" onclick="switchTab(this,'6M')">6M</button>
-                <button class="chart-tab" onclick="switchTab(this,'1Y')">1Y</button>
-              </div>
-            </div>
-            <div class="chart-container">
-              <canvas id="lineChart"></canvas>
-            </div>
-          </div>
-
-          <!-- Holdings table -->
-          <div class="holdings-section">
-            <div class="section-row">
-              <div class="section-title">My Holdings</div>
-              <div class="section-link" onclick="goPage('rebalance')">Rebalance →</div>
-            </div>
-            <div class="holdings-table">
-              <div class="holdings-thead">
-                <div class="th">Name</div>
-                <div class="th">Type</div>
-                <div class="th right">Current Value</div>
-                <div class="th right">Total Return</div>
-                <div class="th right">Units</div>
-              </div>
-              <div class="holding" onclick="showHolding('Nifty 50 Index Fund','Equity Mutual Fund','₹1,24,500','₹18,200','17.1%','up','1,247 units · NAV ₹99.84')">
-                <div class="holding-left">
-                  <div class="holding-ico" style="background:#e8f0eb;color:#4a7c59;">N50</div>
-                  <div>
-                    <div class="holding-name">Nifty 50 Index Fund</div>
-                    <div class="holding-sub">Index Fund</div>
-                  </div>
-                </div>
-                <div class="holding-cell"><span class="holding-tag equity">Equity</span></div>
-                <div class="holding-cell right">₹1,24,500</div>
-                <div class="holding-cell right"><div class="holding-chg up">↑ ₹18,200 (17.1%)</div></div>
-                <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">1,247 units</div>
-              </div>
-              <div class="holding" onclick="showHolding('HDFC Mid-Cap Fund','Equity Mutual Fund','₹74,320','₹9,820','15.2%','up','432 units · NAV ₹172.04')">
-                <div class="holding-left">
-                  <div class="holding-ico" style="background:#eaf2f8;color:#4a7fa8;">MC</div>
-                  <div>
-                    <div class="holding-name">HDFC Mid-Cap Fund</div>
-                    <div class="holding-sub">Mid Cap</div>
-                  </div>
-                </div>
-                <div class="holding-cell"><span class="holding-tag equity">Equity</span></div>
-                <div class="holding-cell right">₹74,320</div>
-                <div class="holding-cell right"><div class="holding-chg up">↑ ₹9,820 (15.2%)</div></div>
-                <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">432 units</div>
-              </div>
-              <div class="holding" onclick="showHolding('SBI Debt Fund','Debt Mutual Fund','₹68,400','₹4,120','6.4%','up','2,800 units · NAV ₹24.43')">
-                <div class="holding-left">
-                  <div class="holding-ico" style="background:#eaf2f8;color:#4a7fa8;">DB</div>
-                  <div>
-                    <div class="holding-name">SBI Debt Fund</div>
-                    <div class="holding-sub">Low Risk</div>
-                  </div>
-                </div>
-                <div class="holding-cell"><span class="holding-tag debt">Debt</span></div>
-                <div class="holding-cell right">₹68,400</div>
-                <div class="holding-cell right"><div class="holding-chg up">↑ ₹4,120 (6.4%)</div></div>
-                <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">2,800 units</div>
-              </div>
-              <div class="holding" onclick="showHolding('Gold ETF','Commodity','₹34,120','-₹840','-2.4%','dn','14 units · Price ₹2,437')">
-                <div class="holding-left">
-                  <div class="holding-ico" style="background:#fdf3e7;color:#c17f3e;">Au</div>
-                  <div>
-                    <div class="holding-name">Gold ETF</div>
-                    <div class="holding-sub">Safe Haven</div>
-                  </div>
-                </div>
-                <div class="holding-cell"><span class="holding-tag gold">Gold</span></div>
-                <div class="holding-cell right">₹34,120</div>
-                <div class="holding-cell right"><div class="holding-chg dn">↓ ₹840 (-2.4%)</div></div>
-                <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">14 units</div>
-              </div>
-              <div class="holding" onclick="showHolding('Infosys Ltd.','Individual Stock','₹21,280','₹3,200','17.7%','up','12 shares · ₹1,773/share')">
-                <div class="holding-left">
-                  <div class="holding-ico" style="background:#f0f5f1;color:#4a7c59;">INFY</div>
-                  <div>
-                    <div class="holding-name">Infosys Ltd.</div>
-                    <div class="holding-sub">Large Cap</div>
-                  </div>
-                </div>
-                <div class="holding-cell"><span class="holding-tag stock">Stock</span></div>
-                <div class="holding-cell right">₹21,280</div>
-                <div class="holding-cell right"><div class="holding-chg up">↑ ₹3,200 (17.7%)</div></div>
-                <div class="holding-cell right" style="font-size:12px;color:var(--ink3);">12 shares</div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
 
       <!-- ===== REBALANCE PAGE ===== -->
       <div class="page" id="page-rebalance">
         <div class="page-header">
-          <div class="page-header-title">What-If <em>Scenarios</em></div>
-          <div class="page-header-sub">Pick a scenario to see how your portfolio would be affected — and what to do about it.</div>
+          <div class="page-header-title">Rebalance Your <em>Portfolio</em></div>
+          <div class="page-header-sub">Optimize your allocation to match your target and market changes</div>
         </div>
         <div class="rebal-grid">
           <div class="rebal-left">
-            <div class="scenario-label">Choose a scenario</div>
+            <div class="rebal-title">Choose a <em>scenario</em></div>
+            <div class="rebal-sub">Pick the approach that feels right. We'll show you the impact below.</div>
+            <div class="scenario-label">Rebalancing Scenarios</div>
             <div class="scenario-grid">
-              <div class="sc-card danger" onclick="selectScenario(this,'crash')">
-                <span class="sc-emoji">📉</span>
-                <div class="sc-title">Market Crash</div>
-                <div class="sc-desc">What if markets fall 20% tomorrow?</div>
+              <div class="sc-card active" onclick="showScenario(this,'low')">
+                <div class="sc-emoji">🎯</div>
+                <div class="sc-title">Conservative</div>
+                <div class="sc-desc">Minimal changes, low risk</div>
               </div>
-              <div class="sc-card warn" onclick="selectScenario(this,'inflation')">
-                <span class="sc-emoji">🌡️</span>
-                <div class="sc-title">High Inflation</div>
-                <div class="sc-desc">Inflation stays at 8%+ for 2 years</div>
+              <div class="sc-card" onclick="showScenario(this,'mid')">
+                <div class="sc-emoji">⚖️</div>
+                <div class="sc-title">Balanced</div>
+                <div class="sc-desc">Moderate rebalancing</div>
               </div>
-              <div class="sc-card" onclick="selectScenario(this,'withdraw')">
-                <span class="sc-emoji">💸</span>
-                <div class="sc-title">Need Cash Soon</div>
-                <div class="sc-desc">I need 20% of my funds in 6 months</div>
-              </div>
-              <div class="sc-card" onclick="selectScenario(this,'raise')">
-                <span class="sc-emoji">🎉</span>
-                <div class="sc-title">I Got a Raise</div>
-                <div class="sc-desc">I can invest ₹5,000 more per month</div>
+              <div class="sc-card warn" onclick="showScenario(this,'high')">
+                <div class="sc-emoji">⚡</div>
+                <div class="sc-title">Aggressive</div>
+                <div class="sc-desc">Full target alignment</div>
               </div>
             </div>
           </div>
           <div class="rebal-right">
-            <!-- Placeholder -->
             <div class="impact-placeholder" id="impactPlaceholder">
-              <div class="impact-placeholder-icon">💡</div>
-              <div class="impact-placeholder-text">Select a scenario on the left to see<br>your personalised rebalancing plan.</div>
+              <div class="impact-placeholder-icon">📊</div>
+              <div class="impact-placeholder-text">Select a scenario to see the impact on your portfolio</div>
             </div>
-            <!-- Impact panel -->
             <div class="impact-panel" id="impactPanel">
               <div class="impact-head">
-                Recommended Rebalancing
-                <span class="impact-badge moderate" id="impactBadge">Moderate change</span>
+                <span>Impact Summary</span>
+                <span class="impact-badge moderate" id="impactBadge">Moderate</span>
               </div>
               <div class="before-after">
                 <div class="ba-box">
-                  <div class="ba-label">Right now</div>
-                  <div class="ba-item"><span class="ba-name">Equity</span><span class="ba-val" id="ba-eq-from">58%</span></div>
-                  <div class="ba-item"><span class="ba-name">Debt</span><span class="ba-val" id="ba-debt-from">27%</span></div>
-                  <div class="ba-item"><span class="ba-name">Gold</span><span class="ba-val" id="ba-gold-from">10%</span></div>
-                  <div class="ba-item"><span class="ba-name">Cash</span><span class="ba-val" id="ba-cash-from">5%</span></div>
+                  <div class="ba-label">Current</div>
+                  <div class="ba-item">
+                    <div class="ba-name">Equity</div>
+                    <div class="ba-val">58%</div>
+                  </div>
+                  <div class="ba-item">
+                    <div class="ba-name">Debt</div>
+                    <div class="ba-val">27%</div>
+                  </div>
+                  <div class="ba-item">
+                    <div class="ba-name">Gold</div>
+                    <div class="ba-val">10%</div>
+                  </div>
                 </div>
                 <div class="ba-arrow">→</div>
                 <div class="ba-box after">
-                  <div class="ba-label after">Recommended</div>
-                  <div class="ba-item"><span class="ba-name">Equity</span><span class="ba-val change" id="ba-eq-to">45%</span></div>
-                  <div class="ba-item"><span class="ba-name">Debt</span><span class="ba-val change" id="ba-debt-to">38%</span></div>
-                  <div class="ba-item"><span class="ba-name">Gold</span><span class="ba-val change" id="ba-gold-to">12%</span></div>
-                  <div class="ba-item"><span class="ba-name">Cash</span><span class="ba-val" id="ba-cash-to">5%</span></div>
+                  <div class="ba-label after">After</div>
+                  <div class="ba-item">
+                    <div class="ba-name">Equity</div>
+                    <div class="ba-val change" id="afterEquity">60%</div>
+                  </div>
+                  <div class="ba-item">
+                    <div class="ba-name">Debt</div>
+                    <div class="ba-val change" id="afterDebt">25%</div>
+                  </div>
+                  <div class="ba-item">
+                    <div class="ba-name">Gold</div>
+                    <div class="ba-val change" id="afterGold">10%</div>
+                  </div>
                 </div>
               </div>
               <div class="why-card">
-                <div class="why-label">Why this recommendation?</div>
-                <div class="why-text" id="whyText"></div>
+                <div class="why-label">Why this matters</div>
+                <div class="why-text" id="whyText">Your equity is 8% above target, increasing risk. This adjustment brings you back into balance.</div>
                 <div class="cost-row">
-                  <div class="cost-tag">Transaction fee: <span id="costFee">~₹280</span></div>
-                  <div class="cost-tag">Tax note: <span id="costTax">Minimal</span></div>
-                  <div class="cost-tag">Time to apply: <span>~2 mins</span></div>
+                  <div class="cost-tag">Estimated cost: <span>₹120</span></div>
+                  <div class="cost-tag">Time: <span>2-3 days</span></div>
                 </div>
               </div>
-              <div class="extra-note" id="extraNote"></div>
-              <button class="apply-btn" onclick="applyRebalance()">Apply This Plan ✓</button>
+              <div class="extra-note">Transactions happen automatically after you approve. No action needed.</div>
+              <button class="apply-btn" onclick="applyRebalance()">Apply This Plan →</button>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- AI SCENARIO CHAT -->
-<div class="ai-chat-section">
-  <div class="ai-chat-label">💬 Ask your own scenario — powered by AI</div>
-  <div class="ai-suggestions">
-    <button class="ai-suggestion" onclick="sendSuggestion(this)">What if I lose my job for 3 months?</button>
-    <button class="ai-suggestion" onclick="sendSuggestion(this)">What if interest rates rise sharply?</button>
-    <button class="ai-suggestion" onclick="sendSuggestion(this)">What if I want to retire 5 years early?</button>
-    <button class="ai-suggestion" onclick="sendSuggestion(this)">Is my portfolio too risky right now?</button>
-  </div>
-  <div class="ai-chat-box">
-    <div class="ai-messages" id="aiMessages">
-      <div class="ai-msg bot">
-        <div class="ai-avatar">AI</div>
-        <div class="ai-bubble">Hi! I'm your portfolio advisor. Ask me any "What-If" scenario — I'll analyze your portfolio and give you a plain-English rebalancing suggestion. 🌱</div>
-      </div>
-    </div>
-    <div class="ai-input-row">
-      <textarea class="ai-input" id="aiInput" rows="1" placeholder="e.g. What if there's a recession next year?" onkeydown="handleAiKey(event)"></textarea>
-      <button class="ai-send" id="aiSendBtn" onclick="sendAiMessage()">Send →</button>
-    </div>
-  </div>
-</div>
 
       <!-- ===== GOALS PAGE ===== -->
       <div class="page" id="page-goals">
         <div class="page-header">
-          <div class="page-header-title">Your <em>Goals</em></div>
-          <div class="page-header-sub">Track how each goal is progressing.</div>
+          <div class="page-header-title">Your <em>Financial</em> Goals</div>
+          <div class="page-header-sub">Track progress and adjust your plans</div>
         </div>
         <div class="goals-grid">
           <div class="goal-card">
             <div class="goal-top">
-              <div class="goal-icon" style="background:#e8f0eb;">🏡</div>
+              <div class="goal-icon" style="background:#e8f0eb;color:#4a7c59;">🏡</div>
               <div>
-                <div class="goal-name">Dream Home</div>
-                <div class="goal-timeline">Target: ₹8,00,000 · By 2028</div>
+                <div class="goal-name">Buy a Home</div>
+                <div class="goal-timeline">Target: 5 years</div>
               </div>
             </div>
             <div class="goal-prog-row">
-              <div class="goal-prog-label">Saved so far</div>
-              <div class="goal-prog-val">₹2,14,000 of ₹8,00,000</div>
+              <div class="goal-prog-label">Progress</div>
+              <div class="goal-prog-val">68%</div>
             </div>
-            <div class="goal-bar"><div class="goal-bar-fill" style="width:26.75%;background:#4a7c59;"></div></div>
-            <div class="goal-status good"><span>On track</span> · Need ₹15,800/month to hit goal</div>
+            <div class="goal-bar"><div class="goal-bar-fill" style="width:68%;background:#4a7c59;"></div></div>
+            <div class="goal-status good">On track · <span>₹42L / ₹50L</span></div>
           </div>
           <div class="goal-card">
             <div class="goal-top">
-              <div class="goal-icon" style="background:#eaf2f8;">🎓</div>
+              <div class="goal-icon" style="background:#eaf2f8;color:#4a7fa8;">🌅</div>
               <div>
-                <div class="goal-name">Education Fund</div>
-                <div class="goal-timeline">Target: ₹5,00,000 · By 2031</div>
+                <div class="goal-name">Retirement</div>
+                <div class="goal-timeline">Target: 25 years</div>
               </div>
             </div>
             <div class="goal-prog-row">
-              <div class="goal-prog-label">Saved so far</div>
-              <div class="goal-prog-val">₹68,000 of ₹5,00,000</div>
+              <div class="goal-prog-label">Progress</div>
+              <div class="goal-prog-val">34%</div>
             </div>
-            <div class="goal-bar"><div class="goal-bar-fill" style="width:13.6%;background:#4a7fa8;"></div></div>
-            <div class="goal-status warn"><span>A little behind</span> · Consider increasing SIP by ₹2,000</div>
+            <div class="goal-bar"><div class="goal-bar-fill" style="width:34%;background:#4a7fa8;"></div></div>
+            <div class="goal-status warn">Needs attention · <span>₹45L / ₹1.5Cr</span></div>
           </div>
           <div class="goal-card">
             <div class="goal-top">
-              <div class="goal-icon" style="background:#fdf3e7;">🌅</div>
+              <div class="goal-icon" style="background:#fdf3e7;color:#c17f3e;">👶</div>
               <div>
-                <div class="goal-name">Retirement Cushion</div>
-                <div class="goal-timeline">Target: ₹50,00,000 · By 2050</div>
+                <div class="goal-name">Child's Education</div>
+                <div class="goal-timeline">Target: 12 years</div>
               </div>
             </div>
             <div class="goal-prog-row">
-              <div class="goal-prog-label">Saved so far</div>
-              <div class="goal-prog-val">₹1,40,000 of ₹50,00,000</div>
+              <div class="goal-prog-label">Progress</div>
+              <div class="goal-prog-val">51%</div>
             </div>
-            <div class="goal-bar"><div class="goal-bar-fill" style="width:2.8%;background:#c17f3e;"></div></div>
-            <div class="goal-status good"><span>Early days, great start</span> · Compound interest will do the heavy lifting</div>
+            <div class="goal-bar"><div class="goal-bar-fill" style="width:51%;background:#c17f3e;"></div></div>
+            <div class="goal-status good">On track · <span>₹18L / ₹35L</span></div>
           </div>
         </div>
         <div class="life-section">
-          <div class="life-title">Did something change in your life?</div>
+          <div class="life-title">Add a new life goal</div>
           <div class="life-grid">
-            <button class="life-btn" onclick="lifeEvent('baby')">
-              <span class="life-em">👶</span>
-              <div class="life-text">Having a baby</div>
-            </button>
-            <button class="life-btn" onclick="lifeEvent('job')">
-              <span class="life-em">💼</span>
-              <div class="life-text">Job change</div>
-            </button>
-            <button class="life-btn" onclick="lifeEvent('married')">
-              <span class="life-em">💍</span>
-              <div class="life-text">Getting married</div>
-            </button>
-            <button class="life-btn" onclick="lifeEvent('retire-soon')">
-              <span class="life-em">🏖️</span>
-              <div class="life-text">Retiring soon</div>
-            </button>
+            <div class="life-btn" onclick="addGoal('Wedding')">
+              <span class="life-em">💒</span>
+              <div class="life-text">Wedding</div>
+            </div>
+            <div class="life-btn" onclick="addGoal('Vacation')">
+              <span class="life-em">✈️</span>
+              <div class="life-text">Dream Vacation</div>
+            </div>
+            <div class="life-btn" onclick="addGoal('Car')">
+              <span class="life-em">🚗</span>
+              <div class="life-text">Buy a Car</div>
+            </div>
+            <div class="life-btn" onclick="addGoal('Other')">
+              <span class="life-em">➕</span>
+              <div class="life-text">Custom Goal</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1193,71 +1197,73 @@ body.is-onboarding .page-content{
       <div class="page" id="page-profile">
         <div class="page-header">
           <div class="page-header-title">Your <em>Profile</em></div>
-          <div class="page-header-sub">Manage your investor settings and preferences.</div>
+          <div class="page-header-sub">Investor details and preferences</div>
         </div>
         <div class="profile-grid">
-          <div>
-            <div class="profile-card" style="margin-bottom:20px;">
-              <div class="profile-avatar">P</div>
-              <div class="profile-name">Priya Sharma</div>
-              <div class="profile-type">🌱 Steady Climber</div>
-              <div class="risk-meter">
-                <div class="risk-label">Your Risk Comfort Level</div>
-                <div class="risk-track"><div class="risk-thumb"></div></div>
-                <div class="risk-labels">
-                  <span>😰 Very Safe</span>
-                  <span>😐 Balanced</span>
-                  <span>😎 Growth</span>
-                </div>
-                <div class="risk-desc">You're in the <strong style="color:var(--sage);">Balanced</strong> zone — steady growth with a safety net. 55–65% equity, 35–45% safer assets.</div>
+          <div class="profile-card">
+            <div class="profile-avatar">P</div>
+            <div class="profile-name">Priya Sharma</div>
+            <div class="profile-type">🌱 Steady Climber</div>
+            <div class="risk-meter">
+              <div class="risk-label">Risk Appetite</div>
+              <div class="risk-track">
+                <div class="risk-thumb"></div>
               </div>
+              <div class="risk-labels">
+                <span>Conservative</span>
+                <span>Moderate</span>
+                <span>Aggressive</span>
+              </div>
+              <div class="risk-desc">You're comfortable with moderate market swings. Strong mindset!</div>
             </div>
           </div>
           <div class="profile-right">
             <div class="stats-grid">
               <div class="stat-card">
-                <div class="stat-lbl">Portfolio Value</div>
-                <div class="stat-val green">₹3.42L</div>
+                <div class="stat-lbl">Total Invested</div>
+                <div class="stat-val">₹3.42L</div>
               </div>
               <div class="stat-card">
                 <div class="stat-lbl">Total Returns</div>
-                <div class="stat-val green">+14.1%</div>
+                <div class="stat-val green">+₹43,200</div>
               </div>
               <div class="stat-card">
                 <div class="stat-lbl">Monthly SIP</div>
                 <div class="stat-val">₹8,000</div>
               </div>
               <div class="stat-card">
-                <div class="stat-lbl">Investing Since</div>
-                <div class="stat-val warm">2 yrs</div>
+                <div class="stat-lbl">Member Since</div>
+                <div class="stat-val warm">May 2023</div>
               </div>
             </div>
             <div class="pref-list">
               <div class="pref-item">
                 <div class="pref-left">
-                  <div class="pref-em">🎯</div>
-                  <div class="pref-info"><strong>Primary Goal</strong><span>Buy a Home · 2028</span></div>
+                  <div class="pref-em">📧</div>
+                  <div class="pref-info">
+                    <strong>Email Notifications</strong>
+                    <span>Daily market updates</span>
+                  </div>
                 </div>
                 <div class="pref-arr">›</div>
               </div>
               <div class="pref-item">
                 <div class="pref-left">
-                  <div class="pref-em">🔔</div>
-                  <div class="pref-info"><strong>Alerts & Nudges</strong><span>Weekly summary on</span></div>
+                  <div class="pref-em">🔐</div>
+                  <div class="pref-info">
+                    <strong>Security</strong>
+                    <span>2FA enabled</span>
+                  </div>
                 </div>
                 <div class="pref-arr">›</div>
               </div>
               <div class="pref-item">
                 <div class="pref-left">
-                  <div class="pref-em">🔒</div>
-                  <div class="pref-info"><strong>Tax Status</strong><span>Individual · Old Regime</span></div>
-                </div>
-                <div class="pref-arr">›</div>
-              </div>
-              <div class="pref-item" onclick="goPage('onboard')">
-                <div class="pref-left">
-                  <div class="pref-em">✏️</div>
-                  <div class="pref-info"><strong>Retake Risk Quiz</strong><span>Update your investor profile</span></div>
+                  <div class="pref-em">⚙️</div>
+                  <div class="pref-info">
+                    <strong>Account Settings</strong>
+                    <span>Manage preferences</span>
+                  </div>
                 </div>
                 <div class="pref-arr">›</div>
               </div>
@@ -1266,394 +1272,155 @@ body.is-onboarding .page-content{
         </div>
       </div>
 
-    </div><!-- end page-content -->
-  </div><!-- end main-content -->
-</div><!-- end app-layout -->
+    </div>
+  </div>
+</div>
 
-<!-- Holding Modal -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
   <div class="modal">
-    <div class="modal-title" id="modalTitle"></div>
-    <div class="modal-sub" id="modalSub"></div>
+    <div class="modal-title" id="modalTitle">Holding Details</div>
+    <div class="modal-sub" id="modalSub">Detailed information about this investment</div>
     <div class="modal-detail" id="modalDetail"></div>
     <button class="modal-close" onclick="closeModal()">Close</button>
   </div>
 </div>
 
-<!-- Life Event Modal -->
-<div class="modal-overlay" id="lifeModal" onclick="closeLifeModal(event)">
-  <div class="modal">
-    <div class="modal-title" id="lifeModalTitle"></div>
-    <div class="modal-sub" id="lifeModalSub"></div>
-    <div class="modal-detail" id="lifeModalDetail"></div>
-    <button class="btn-full" style="margin-bottom:12px;" onclick="closeLifeModal();goPage('rebalance')">See Recommended Changes</button>
-    <button class="modal-close" onclick="closeLifeModal()">Maybe Later</button>
-  </div>
-</div>
-
-<!-- Toast -->
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-let obSelections={ob1:null,ob2:null,ob3:null,ob4:null};
-let donutChart,lineChart;
+let currentPage = 'onboard';
+let obSelections = {ob1: null, ob2: null, ob3: null, ob4: null};
+let aiMessages = [];
 
-// ONBOARDING
-function selectOption(el,group){
-  const container=document.getElementById(group+'-options');
-  container.querySelectorAll('.ob-option,.ob-emoji-opt').forEach(e=>e.classList.remove('selected'));
+// Page Navigation
+function goPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (page === 'dashboard') document.getElementById('nav-dashboard').classList.add('active');
+  if (page === 'rebalance') document.getElementById('nav-rebalance').classList.add('active');
+  if (page === 'goals') document.getElementById('nav-goals').classList.add('active');
+  if (page === 'profile') document.getElementById('nav-profile').classList.add('active');
+  currentPage = page;
+}
+
+// Onboarding
+function goOb(step) {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('ob-step-' + i);
+    if (el) el.style.display = (i === step) ? 'block' : 'none';
+  }
+}
+
+function selectOption(el, group) {
+  document.querySelectorAll(`[id="${group}-options"] .ob-option, [id="${group}-options"] .ob-emoji-opt`).forEach(e => e.classList.remove('selected'));
   el.classList.add('selected');
-  obSelections[group]=el.dataset.val;
-  const nextBtn=document.getElementById(group+'-next');
-  if(nextBtn) nextBtn.disabled=false;
+  obSelections[group] = el.getAttribute('data-val');
+  document.getElementById(group + '-next').disabled = false;
 }
 
-function goOb(step){
-  document.querySelectorAll('[id^="ob-step-"]').forEach(e=>e.style.display='none');
-  document.getElementById('ob-result').style.display='none';
-  const el=document.getElementById('ob-step-'+step);
-  if(el) el.style.display='block';
+function showResult() {
+  document.getElementById('ob-step-4').style.display = 'none';
+  document.getElementById('ob-result').style.display = 'block';
 }
 
-function showResult(){
-  document.querySelectorAll('[id^="ob-step-"]').forEach(e=>e.style.display='none');
-  document.getElementById('ob-result').style.display='block';
-}
-
-// PAGE NAVIGATION
-function goPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-
-  if(name==='onboard'){
-    document.body.classList.add('is-onboarding');
-  } else {
-    document.body.classList.remove('is-onboarding');
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-    const active=document.getElementById('nav-'+name);
-    if(active) active.classList.add('active');
-  }
-
-  const pc=document.getElementById('pageContent');
-  pc.scrollTop=0;
-
-  if(name==='dashboard'&&!donutChart){
-    setTimeout(initCharts,100);
-  }
-}
-
-// CHARTS
-function initCharts(){
-  const donutCtx=document.getElementById('donutChart').getContext('2d');
-  donutChart=new Chart(donutCtx,{
-    type:'doughnut',
-    data:{
-      labels:['Equity','Debt','Gold','Cash'],
-      datasets:[{
-        data:[58,27,10,5],
-        backgroundColor:['#4a7c59','#4a7fa8','#c17f3e','#c9c0b4'],
-        borderWidth:0,hoverOffset:4
-      }]
-    },
-    options:{
-      responsive:false,cutout:'70%',
-      plugins:{legend:{display:false},tooltip:{enabled:false}}
-    }
-  });
-
-  const lineCtx=document.getElementById('lineChart').getContext('2d');
-  lineChart=new Chart(lineCtx,{
-    type:'line',
-    data:{
-      labels:['Nov','Dec','Jan','Feb','Mar','Apr'],
-      datasets:[{
-        label:'Portfolio Value',
-        data:[290000,298000,305000,318000,328000,342000],
-        borderColor:'#4a7c59',
-        backgroundColor:'rgba(74,124,89,0.08)',
-        fill:true,tension:0.4,borderWidth:2,
-        pointRadius:4,pointBackgroundColor:'#4a7c59',pointBorderWidth:0
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{grid:{display:false},ticks:{font:{size:11},color:'#9a8f84'}},
-        y:{
-          grid:{color:'rgba(0,0,0,0.04)'},
-          ticks:{font:{size:11},color:'#9a8f84',callback:v=>'₹'+(v/100000).toFixed(1)+'L'}
-        }
-      }
-    }
-  });
-}
-
-function switchTab(btn,period){
-  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  const datasets={
-    '1M':{labels:['W1','W2','W3','W4'],data:[335000,338000,340000,342000]},
-    '6M':{labels:['Nov','Dec','Jan','Feb','Mar','Apr'],data:[290000,298000,305000,318000,328000,342000]},
-    '1Y':{labels:['May','Jul','Sep','Nov','Jan','Mar'],data:[240000,258000,275000,290000,315000,342000]}
-  };
-  if(lineChart&&datasets[period]){
-    lineChart.data.labels=datasets[period].labels;
-    lineChart.data.datasets[0].data=datasets[period].data;
-    lineChart.update();
-  }
-}
-
-// HOLDING MODAL
-function showHolding(name,type,value,gain,gainPct,dir,units){
-  document.getElementById('modalTitle').textContent=name;
-  const plain={
-    'Nifty 50 Index Fund':'Tracks India\'s top 50 companies. When Indian big companies do well, so does this fund. Very low cost, great for long-term wealth.',
-    'HDFC Mid-Cap Fund':'Invests in medium-sized growing companies. Higher growth potential than big companies, but slightly more ups and downs.',
-    'SBI Debt Fund':'Lends your money to safe borrowers (like the government). Slower growth, but very stable — like a savings account but better.',
-    'Gold ETF':'Tracks the price of gold without you having to buy physical gold. A safety net when other investments fall.',
-    'Infosys Ltd.':'One of India\'s largest IT companies. You own a small piece of it and benefit when it grows or pays dividends.'
-  };
-  document.getElementById('modalSub').textContent=plain[name]||'A diversified investment fund.';
-  const isUp=dir==='up';
-  document.getElementById('modalDetail').innerHTML=`
-    <div class="modal-row"><span class="modal-row-label">Type</span><span class="modal-row-val">${type}</span></div>
-    <div class="modal-row"><span class="modal-row-label">Current Value</span><span class="modal-row-val">${value}</span></div>
-    <div class="modal-row"><span class="modal-row-label">Total Gain/Loss</span><span class="modal-row-val ${isUp?'green':'red'}">${isUp?'↑':'↓'} ${gain} (${gainPct})</span></div>
-    <div class="modal-row"><span class="modal-row-label">Details</span><span class="modal-row-val">${units}</span></div>
-  `;
-  document.getElementById('modalOverlay').classList.add('show');
-}
-
-function closeModal(e){
-  if(!e||e.target===document.getElementById('modalOverlay')){
-    document.getElementById('modalOverlay').classList.remove('show');
-  }
-}
-
-// SCENARIOS
-const scenarios={
-  crash:{
-    badge:'High change',badgeClass:'high',
-    eq:'45%',debt:'38%',gold:'12%',cash:'5%',
-    eqClass:'lower',debtClass:'change',goldClass:'change',
-    why:'In a market crash, equity funds fall the most. By moving money from equity into debt funds and gold, we protect your wealth. Debt is stable like a fixed deposit, and gold often rises when stocks fall — it\'s your financial umbrella in a storm.',
-    fee:'~₹420',tax:'May apply on equity sold < 1 year',
-    note:'Selling equity funds held for less than 1 year may attract short-term capital gains tax of 15%. Funds held over 1 year are taxed at 10% on gains above ₹1 lakh.'
-  },
-  inflation:{
-    badge:'Moderate change',badgeClass:'moderate',
-    eq:'52%',debt:'18%',gold:'22%',cash:'8%',
-    eqClass:'lower',debtClass:'lower',goldClass:'change',
-    why:'When inflation is high, cash and regular debt funds lose value quietly. Gold and certain equity funds (especially those with real assets like property or commodities) tend to beat inflation. We\'re shifting your mix to protect your purchasing power.',
-    fee:'~₹280',tax:'Minimal',
-    note:'Gold ETF gains are taxed as debt — 20% with indexation if held over 3 years, otherwise at your income tax slab rate.'
-  },
-  withdraw:{
-    badge:'Low change',badgeClass:'low',
-    eq:'42%',debt:'38%',gold:'10%',cash:'10%',
-    eqClass:'lower',debtClass:'change',goldClass:'',
-    why:'Since you\'ll need cash in 6 months, we\'re moving some equity into liquid funds (a type of debt fund). Equity markets can dip in the short term, and you don\'t want to sell at a loss when you need the money. Liquid funds can be withdrawn in 1 working day.',
-    fee:'~₹180',tax:'Nil on liquid funds < ₹1L',
-    note:'Liquid funds are one of the safest places to park short-term money. They offer better returns than a savings account and can be redeemed within 24 hours.'
-  },
-  raise:{
-    badge:'Low change',badgeClass:'low',
-    eq:'62%',debt:'25%',gold:'10%',cash:'3%',
-    eqClass:'change',debtClass:'lower',goldClass:'',
-    why:'Great news! Since you have more to invest, we can slightly increase your equity allocation to grow wealth faster. At your age and goal timeline, a bit more equity exposure is sensible. We\'re also trimming cash since you no longer need as much emergency buffer.',
-    fee:'₹0',tax:'No selling needed',
-    note:'This rebalancing only involves buying more — no selling, no tax implications. Your new SIP amount will automatically adjust to the new allocation.'
-  }
-};
-
-function selectScenario(el,key){
-  document.querySelectorAll('.sc-card').forEach(c=>c.classList.remove('active'));
+// Rebalance
+function showScenario(el, scenario) {
+  document.querySelectorAll('.sc-card').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  const s=scenarios[key];
-  document.getElementById('impactPlaceholder').style.display='none';
+  document.getElementById('impactPlaceholder').style.display = 'none';
   document.getElementById('impactPanel').classList.add('show');
-  document.getElementById('impactBadge').textContent=s.badge;
-  document.getElementById('impactBadge').className='impact-badge '+s.badgeClass;
-  document.getElementById('ba-eq-to').textContent=s.eq;
-  document.getElementById('ba-eq-to').className='ba-val '+(s.eqClass||'');
-  document.getElementById('ba-debt-to').textContent=s.debt;
-  document.getElementById('ba-debt-to').className='ba-val '+(s.debtClass||'');
-  document.getElementById('ba-gold-to').textContent=s.gold;
-  document.getElementById('ba-gold-to').className='ba-val '+(s.goldClass||'');
-  document.getElementById('ba-cash-to').textContent=s.cash;
-  document.getElementById('whyText').textContent=s.why;
-  document.getElementById('costFee').textContent=s.fee;
-  document.getElementById('costTax').textContent=s.tax;
-  document.getElementById('extraNote').textContent=s.note;
+  const scenarios = {
+    low: {eq: 60, de: 25, go: 10, badge: 'low', why: 'Minimal changes to reduce trading costs.'},
+    mid: {eq: 60, de: 30, go: 10, badge: 'moderate', why: 'Balanced approach to reach target allocation.'},
+    high: {eq: 60, de: 25, go: 15, badge: 'high', why: 'Full rebalancing to match your ideal allocation.'}
+  };
+  const s = scenarios[scenario];
+  document.getElementById('afterEquity').textContent = s.eq + '%';
+  document.getElementById('afterDebt').textContent = s.de + '%';
+  document.getElementById('afterGold').textContent = s.go + '%';
+  document.getElementById('whyText').textContent = s.why;
+  document.getElementById('impactBadge').className = 'impact-badge ' + s.badge;
 }
 
-function applyRebalance(){
-  showToast('✓ Plan saved! We\'ll guide you step by step.');
-  document.getElementById('impactPanel').classList.remove('show');
-  document.getElementById('impactPlaceholder').style.display='flex';
-  document.querySelectorAll('.sc-card').forEach(c=>c.classList.remove('active'));
+function applyRebalance() {
+  showToast('Rebalancing plan applied! Your portfolio will update within 2-3 days.');
+  goPage('dashboard');
 }
 
-// LIFE EVENTS
-const lifeEvents={
-  baby:{
-    title:'Having a baby — congratulations! 🎉',
-    sub:'This is a big life change. Your financial priorities are likely shifting towards safety and building a cushion.',
-    rows:[{l:'Risk level',v:'Reducing slightly'},{l:'Suggested change',v:'Increase liquid fund allocation'},{l:'New goal added',v:'Child\'s Education Fund'},{l:'Emergency fund',v:'Aim for 6 months of expenses'}]
-  },
-  job:{
-    title:'Job change — exciting times!',
-    sub:'Your income may change temporarily. Let\'s make sure your investments stay safe during the transition.',
-    rows:[{l:'Suggested action',v:'Move 3 months expenses to liquid fund'},{l:'SIP adjustment',v:'Pause or reduce until settled'},{l:'PF transfer',v:'Consolidate old employer PF'}]
-  },
-  married:{
-    title:'Getting married — best wishes! 💍',
-    sub:'Marriage often means shared goals and potentially higher combined income. Time to plan together.',
-    rows:[{l:'Joint goal suggested',v:'Dream Home Fund'},{l:'Tax opportunity',v:'Combined 80C benefits'},{l:'Risk profile',v:'May need recalibration'}]
-  },
-  'retire-soon':{
-    title:'Retiring soon — the finish line!',
-    sub:'Time to shift focus from growth to capital preservation. Your money needs to last 20-30 years.',
-    rows:[{l:'Equity suggestion',v:'Reduce to 30-40%'},{l:'Debt suggestion',v:'Increase to 50-60%'},{l:'SWP plan',v:'Set up systematic monthly withdrawal'},{l:'Tax planning',v:'Consult a CA before March'}]
-  }
-};
-
-function lifeEvent(key){
-  const e=lifeEvents[key];
-  document.getElementById('lifeModalTitle').textContent=e.title;
-  document.getElementById('lifeModalSub').textContent=e.sub;
-  document.getElementById('lifeModalDetail').innerHTML=e.rows.map(r=>`
-    <div class="modal-row"><span class="modal-row-label">${r.l}</span><span class="modal-row-val">${r.v}</span></div>
-  `).join('');
-  document.getElementById('lifeModal').classList.add('show');
+// Goals
+function addGoal(goal) {
+  showToast(goal + ' goal added! Set your target amount and timeline.');
 }
 
-function closeLifeModal(e){
-  if(!e||e.target===document.getElementById('lifeModal')){
-    document.getElementById('lifeModal').classList.remove('show');
-  }
+// Holdings modal
+function showHolding(name, type, val, gain, ret, dir, details) {
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalSub').textContent = type;
+  document.getElementById('modalDetail').innerHTML = `
+    <div class="modal-row">
+      <div class="modal-row-label">Current Value</div>
+      <div class="modal-row-val">${val}</div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-row-label">Total Return</div>
+      <div class="modal-row-val ${dir === 'up' ? 'green' : 'red'}">${gain} (${ret})</div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-row-label">Details</div>
+      <div class="modal-row-val">${details}</div>
+    </div>
+  `;
+  document.getElementById('modal').classList.add('show');
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
 }
 
-// INIT
-goPage('onboard');
-goOb(1);
+// Chart
+function switchTab(el, period) {
+  document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
 
-// ========= AI SCENARIO CHAT =========
-const PORTFOLIO_CONTEXT = `
-You are a friendly, jargon-free financial advisor inside an app called SteadyFi.
-The user's portfolio:
-- Total value: ₹3,42,000
-- Allocation: 58% Equity, 27% Debt, 10% Gold, 5% Cash
-- Risk profile: Balanced / Moderate (Steady Climber)
-- Primary goal: Buy a home by 2028
-- Monthly SIP: ₹8,000
-- Investing since: 2 years
-
-When the user describes a scenario, respond with:
-1. A 2-3 sentence plain-English impact assessment (what this scenario means for their portfolio)
-2. A specific rebalancing suggestion (e.g. "reduce equity to X%, increase debt to Y%")
-3. One simple action they can take today
-
-Rules:
-- Never use jargon without explaining it
-- Keep the total response under 120 words
-- Be warm, calm, and reassuring
-- Always end with a one-line encouragement
-- Format clearly but do NOT use markdown headers or bullet symbols — write in short plain paragraphs
-`;
-
-async function sendAiMessage() {
+// AI Chat
+function sendAIMessage() {
   const input = document.getElementById('aiInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-
-  appendMessage('user', msg);
+  const message = input.value.trim();
+  if (!message) return;
+  
+  const msgs = document.getElementById('aiMessages');
+  msgs.innerHTML += `<div class="ai-msg user"><div class="ai-avatar">P</div><div class="ai-bubble">${message}</div></div>`;
   input.value = '';
-  input.style.height = 'auto';
-
-  const sendBtn = document.getElementById('aiSendBtn');
-  sendBtn.disabled = true;
-
-  const typingId = appendTyping();
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: PORTFOLIO_CONTEXT,
-        messages: [{ role: 'user', content: msg }]
-      })
-    });
-
-    const data = await response.json();
-    removeTyping(typingId);
-
-    const reply = data.content?.[0]?.text || "Sorry, I couldn't process that. Please try again.";
-    appendMessage('bot', reply);
-  } catch (err) {
-    removeTyping(typingId);
-    appendMessage('bot', "Hmm, I'm having trouble connecting right now. Please try again in a moment.");
-  }
-
-  sendBtn.disabled = false;
+  
+  setTimeout(() => {
+    const responses = [
+      "That's a great question! Let me analyze your portfolio.",
+      "I recommend rebalancing to optimize your returns.",
+      "Your portfolio is well-diversified. Good job!",
+      "Consider increasing your SIP for better long-term growth."
+    ];
+    const reply = responses[Math.floor(Math.random() * responses.length)];
+    msgs.innerHTML += `<div class="ai-msg bot"><div class="ai-avatar">V</div><div class="ai-bubble">${reply}</div></div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 600);
 }
 
-function appendMessage(role, text) {
-  const container = document.getElementById('aiMessages');
-  const div = document.createElement('div');
-  div.className = `ai-msg ${role}`;
-  div.innerHTML = `
-    <div class="ai-avatar">${role === 'bot' ? 'AI' : 'P'}</div>
-    <div class="ai-bubble">${text}</div>
-  `;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+// Toast
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-function appendTyping() {
-  const container = document.getElementById('aiMessages');
-  const id = 'typing-' + Date.now();
-  const div = document.createElement('div');
-  div.className = 'ai-msg bot';
-  div.id = id;
-  div.innerHTML = `
-    <div class="ai-avatar">AI</div>
-    <div class="ai-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>
-  `;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-  return id;
-}
-
-function removeTyping(id) {
-  const el = document.getElementById(id);
-  if (el) el.remove();
-}
-
-function sendSuggestion(btn) {
-  document.getElementById('aiInput').value = btn.textContent;
-  sendAiMessage();
-}
-
-function handleAiKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendAiMessage();
-  }
-}
-
-
+// Initialize onboarding on load
+window.addEventListener('load', () => {
+  goOb(1);
+});
 </script>
 </body>
 </html>
