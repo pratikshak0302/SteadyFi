@@ -1,4 +1,4 @@
-# 🌱 VestWise — Your Wealth, Simplified
+# 🌱 SteadyFi — Your Wealth, Simplified
 
 > A Goldman Sachs × UT Dallas Hackathon Submission  
 > **Track:** Empowering the Everyday Investor
@@ -62,8 +62,6 @@ npx serve .
 # then visit http://localhost:3000
 ```
 
-Or visit the live demo: **[your-github-username.github.io/vestwise](https://your-github-username.github.io/vestwise)**
-
 ---
 
 ## 🛠️ Tech Stack
@@ -87,17 +85,6 @@ No frameworks, no build tools, no dependencies to install. Runs entirely in the 
 - **Radical transparency** — every recommendation shows the cost, tax note, and plain-English rationale
 
 ---
-
-## 👥 Team
-
-| Name | Role |
-|---|---|
-| [Team Member 1] | [Role] |
-| [Team Member 2] | [Role] |
-| [Team Member 3] | [Role] |
-
-**Institution:** Naveen Jindal School of Management, UT Dallas
-
 ---
 
 ## 📋 Hackathon Judging Criteria
